@@ -6,32 +6,6 @@ use jasonwynn10\VanillaEntityAI\block\MonsterSpawner;
 use jasonwynn10\VanillaEntityAI\block\Pumpkin;
 use jasonwynn10\VanillaEntityAI\command\DifficultyCommand;
 use jasonwynn10\VanillaEntityAI\command\SummonCommand;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Blaze;
-use jasonwynn10\VanillaEntityAI\entity\hostile\CaveSpider;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Creeper;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Drowned;
-use jasonwynn10\VanillaEntityAI\entity\hostile\ElderGuardian;
-use jasonwynn10\VanillaEntityAI\entity\hostile\EnderDragon;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Enderman;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Endermite;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Ghast;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Guardian;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Husk;
-use jasonwynn10\VanillaEntityAI\entity\hostile\MagmaCube;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Shulker;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Silverfish;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Skeleton;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Slime;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Spider;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Stray;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Vindicator;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Witch;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Wither;
-use jasonwynn10\VanillaEntityAI\entity\hostile\WitherSkeleton;
-use jasonwynn10\VanillaEntityAI\entity\hostile\Zombie;
-use jasonwynn10\VanillaEntityAI\entity\hostile\ZombieHorse;
-use jasonwynn10\VanillaEntityAI\entity\hostile\ZombiePigman;
-use jasonwynn10\VanillaEntityAI\entity\hostile\ZombieVillager;
 use jasonwynn10\VanillaEntityAI\entity\neutral\Item;
 use jasonwynn10\VanillaEntityAI\entity\passive\Bat;
 use jasonwynn10\VanillaEntityAI\entity\passive\Chicken;
@@ -47,13 +21,10 @@ use jasonwynn10\VanillaEntityAI\entity\passive\Parrot;
 use jasonwynn10\VanillaEntityAI\entity\passive\Pig;
 use jasonwynn10\VanillaEntityAI\entity\passive\Rabbit;
 use jasonwynn10\VanillaEntityAI\entity\passive\Sheep;
-use jasonwynn10\VanillaEntityAI\entity\passive\SkeletonHorse;
 use jasonwynn10\VanillaEntityAI\entity\passive\Squid;
 use jasonwynn10\VanillaEntityAI\entity\passive\Villager;
 use jasonwynn10\VanillaEntityAI\entity\passiveaggressive\IronGolem;
 use jasonwynn10\VanillaEntityAI\entity\passiveaggressive\PolarBear;
-use jasonwynn10\VanillaEntityAI\entity\passiveaggressive\SnowGolem;
-use jasonwynn10\VanillaEntityAI\entity\passiveaggressive\Wolf;
 use jasonwynn10\VanillaEntityAI\task\DespawnTask;
 use jasonwynn10\VanillaEntityAI\task\HostileSpawnTask;
 use jasonwynn10\VanillaEntityAI\task\InhabitedChunkCounter;
@@ -86,101 +57,20 @@ class EntityAI extends PluginBase {
 		Cow::class => ['Cow', 'minecraft:cow'],
 		Pig::class => ['Pig', 'minecraft:pig'],
 		Sheep::class => ['sheep', 'minecraft:sheep'],
-		Wolf::class => ['Wolf', 'minecraft:wolf'],
-		Villager::class => ['Villager', 'minecraft:villager'],
 		Mooshroom::class => ['Mooshroom', 'minecraft:mooshroom'],
 		Squid::class => ['Squid', 'minecraft:squid'],
 		Rabbit::class => ['Rabbit', 'minecraft:rabbit'],
-		Bat::class => ['Bat', 'minecraft:bat'],
 		IronGolem::class => ['IronGolem', 'minecraft:irongolem'],
-		SnowGolem::class => ['SnowGolem', 'minecraft:snowgolem'],
 		Ocelot::class => ['Ocelot', 'minecraft:ocelot'],
 		Horse::class => ['Horse', 'minecraft:horse'],
 		Donkey::class => ['Donkey', 'minecraft:donkey'],
 		Mule::class => ['Mule', 'minecraft:mule'],
-		SkeletonHorse::class => ['SkeletonHorse', 'minecraft:skeletonhorse'],
-		ZombieHorse::class => ['ZombieHorse', 'minecraft:zombiehorse'],
 		PolarBear::class => ['PolarBear', 'minecraft:polarbear'],
 		Llama::class => ['Llama', 'minecraft:llama'],
 		Parrot::class => ['Parrot', 'minecraft:parrot'],
 		Dolphin::class => ['Dolphin', 'minecraft:dolphin'],
-		Zombie::class => ['Zombie', 'minecraft:zombie'],
-		Creeper::class => ['Creeper', 'minecraft:creeper'],
-		Skeleton::class => ['Skeleton', 'minecraft:skeleton'],
-		Spider::class => ['Spider', 'minecraft:spider'],
-		ZombiePigman::class => ['PigZombie', 'minecraft:pigzombie'],
-		Slime::class => ['Slime', 'minecraft:slime'],
-		Enderman::class => ['Enderman', 'minecraft:enderman'],
-		Silverfish::class => ['Silverfish', 'minecraft:silverfish'],
-		CaveSpider::class => ['CaveSpider', 'minecraft:cavespider'],
-		Ghast::class => ['Ghast', 'minecraft:ghast'],
-		MagmaCube::class => ['MagmaCube', 'minecraft:magmacube'],
-		Blaze::class => ['Blaze', 'minecraft:blaze'],
-		ZombieVillager::class => ['ZombieVillager', 'minecraft:zombievillager'],
-		Witch::class => ['Witch', 'minecraft:witch'],
-		Stray::class => ['Stray', 'minecraft:stray'],
-		Husk::class => ['Husk', 'minecraft:husk'],
-		WitherSkeleton::class => ['WitherSkeleton', 'minecraft:witherskeleton'],
-		Guardian::class => ['Guardian', 'minecraft:guardian'],
-		ElderGuardian::class => ['ElderGuardian', 'minecraft:elderguardian'],
-		//NPC
-		Wither::class => ['Wither', 'minecraft:wither'],
-		EnderDragon::class => ['EnderDragon', 'minecraft:enderdragon'],
-		Shulker::class => ['Shulker', 'minecraft:shulker'],
-		Endermite::class => ['Endermite', 'minecraft:endermite'],
-		//Learn to code mascot
-		Vindicator::class => ['Vindicator', 'minecraft:vindicator'],
-		//
-		//ArmorStand::class => [],
-		//TripodCamera::class => [],
-		// player
 		Item::class => ['Item', 'minecraft:item'],
-		//TNT::class => [],
-		//FallingBlock::class => [],
-		//MovingBlock::class => [],
-		//ExperienceBottle::class => [],
-		//ExperienceOrb::class => [],
-		//EyeOfEnder::class => [],
-		//EnderCrystal::class => ['EnderCrystal', 'minecraft:ender_crystal'],
-		//FireworksRocket::class => ['FireworksRocket',	'minecraft:fireworks_rocket'],
-		//Trident::class => ['Thrown Trident', 'minecraft:thrown_trident'],
-		//
-		//ShulkerBullet::class => [],
-		//FishingHook::class => ['FishingHook', 'minecraft:fishinghook'],
-		//chalkboard
-		//DragonFireball::class => [],
-		//Arrow::class => [],
-		//Snowball::class => [],
-		//Egg::class => [],
-		//Painting::class => [],
-		//Minecart::class => ['Minecart', 'minecraft:minecart'],
-		//LargeFireball::class => [],
-		//SplashPotion::class => [],
-		//EnderPearl::class => [],
-		//LeashKnot::class => [],
-		//WitherSkull::class => [],
-		//Boat::class => [],
-		//DangerousWitherSkull::class => [],
-		//Lightning::class => [],
-		//Fireball::class => [],
-		//AreaEffectCloud::class => [],
-		//HopperMinecart::class => [],
-		//TNTMinecart::class => [],
-		//ChestMinecart::class => [],
-		//
-		//CommandBlockMinecart::class => [],
-		//LingeringPotion::class => [],
-		//LlamaSpit::class => [],
-		//EvocationFang::class => [],
-		//Evoker::class => [],
-		//Vex::class => [],
-		//ice bomb
-		//balloon
-		//pufferfish
-		//salmon
-		Drowned::class => ['Drowned', 'minecraft:drowned'],
-		//tropical fish
-		//fish
+		Drowned::class => ['Drowned', 'minecraft:drowned']
 	];
 	/** @var self|null $instance */
 	private static $instance;
@@ -246,7 +136,7 @@ class EntityAI extends PluginBase {
 			"announce-player-achievements" => true,
 			"spawn-protection" => 16,
 			"max-players" => 20,
-			"spawn-animals" => false, // TODO: default to true once task lag is fixed
+			"spawn-animals" => true, // TODO: default to true once task lag is fixed
 			"spawn-mobs" => false, // TODO: default to true once task lag is fixed
 			"gamemode" => 0,
 			"force-gamemode" => false,
@@ -266,7 +156,7 @@ class EntityAI extends PluginBase {
 			"language" => "eng"
 		]);
 		if(!$properties->exists("spawn-animals")) {
-			$properties->set("spawn-animals", false); // TODO: default to true once task lag is fixed
+			$properties->set("spawn-animals", true); // TODO: default to true once task lag is fixed
 		}
 		if(!$properties->exists("spawn-mobs")) {
 			$properties->set("spawn-mobs", false); // TODO: default to true once task lag is fixed
